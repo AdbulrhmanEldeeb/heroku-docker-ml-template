@@ -15,11 +15,12 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy the entire app directory to the container
 COPY ./app ./app
 
-# Expose the port on which FastAPI will run
-EXPOSE 8000
+# Expose the port on which heroku will run fastapi 
+EXPOSE ${PORT}
 
 # Set environment variables
 # ENV PYTHONUNBUFFERED=1
 
 # Run FastAPI app using Uvicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "${PORT}"]
