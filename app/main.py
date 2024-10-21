@@ -3,11 +3,19 @@ from pydantic import BaseModel
 from app.model.model import predict_pipeline
 from app.model.model import __version__ as model_version
 from typing import Annotated
-import uvicorn
-import os 
+# import uvicorn
+# import os 
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can restrict this to specific origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 class ValuesInput(BaseModel):
     value1: Annotated[float, Query(gt=0)]
     value2: Annotated[float, Query(gt=0)]
